@@ -1,1 +1,1 @@
-# otus_java_22_12
+# Домашние задания для курса OTUS <a href="https://otus.ru/lessons/java-professional/" target="_blank">"Разработчик Java"</a>
