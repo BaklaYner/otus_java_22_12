@@ -7,12 +7,16 @@ public class Customer {
     private String name;
     private long scores;
 
-    //todo: 1. в этом классе надо исправить ошибки
-
     public Customer(long id, String name, long scores) {
         this.id = id;
         this.name = name;
         this.scores = scores;
+    }
+
+    public Customer(Customer customerForClone) {
+        this.id = customerForClone.getId();
+        this.name = customerForClone.getName();
+        this.scores = customerForClone.getScores();
     }
 
     public long getId() {
