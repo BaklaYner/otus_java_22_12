@@ -28,7 +28,6 @@ public class CustomerTest {
     }
 
     @Test
-    @Disabled //надо удалить
     @DisplayName("Customer object as key in Map")
     void customerAsKeyTest() {
         //given
