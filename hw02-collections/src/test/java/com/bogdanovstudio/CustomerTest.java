@@ -1,6 +1,5 @@
 package com.bogdanovstudio;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -10,8 +9,6 @@ import java.util.Map;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class CustomerTest {
-    // Все тесты должны проходить, менять тесты не надо.
-
     @Test
     @DisplayName("Check that Customer class is not broken")
     void setterCustomerTest() {
@@ -55,7 +52,6 @@ public class CustomerTest {
     }
 
     @Test
-    @Disabled //надо удалить
     @DisplayName("Sort by score field value asc")
     void scoreSortingTest() {
         //given
@@ -95,7 +91,6 @@ public class CustomerTest {
     }
 
     @Test
-    @Disabled //надо удалить
     @DisplayName("Collection modification")
     void mutationTest() {
         //given
