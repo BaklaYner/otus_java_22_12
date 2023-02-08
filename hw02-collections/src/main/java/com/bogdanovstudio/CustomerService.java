@@ -1,21 +1,23 @@
 package com.bogdanovstudio;
 
+import java.util.Comparator;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class CustomerService {
-    //todo: 3. надо реализовать методы этого класса
-    //важно подобрать подходящую Map-у, посмотрите на редко используемые методы, они тут полезны
+    private final TreeMap<Customer, String> dataByCustomersSortedByCustomersScore = new TreeMap<>(Comparator.comparingLong(Customer::getScores));
 
     public Map.Entry<Customer, String> getSmallest() {
-        //Возможно, чтобы реализовать этот метод, потребуется посмотреть как Map.Entry сделан в jdk
-        return null; // это "заглушка, чтобы скомилировать"
+        var potentialSmallest = dataByCustomersSortedByCustomersScore.firstEntry();
+        return potentialSmallest != null ? Map.entry(new Customer(potentialSmallest.getKey()), potentialSmallest.getValue()) : null;
     }
 
     public Map.Entry<Customer, String> getNext(Customer customer) {
-        return null; // это "заглушка, чтобы скомилировать"
+        var potentialNext = dataByCustomersSortedByCustomersScore.higherEntry(customer);
+        return potentialNext != null ? Map.entry(new Customer(potentialNext.getKey()), potentialNext.getValue()) : null;
     }
 
     public void add(Customer customer, String data) {
-
+        dataByCustomersSortedByCustomersScore.put(customer, data);
     }
 }
