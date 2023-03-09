@@ -3,8 +3,9 @@ package com.bogdanovstudio;
 import java.lang.reflect.Method;
 
 public class TestAnnotationHandler {
-    public static void executeTests(Class<?> classForTest) {
-        var testData = new TestData(classForTest);
+    public static void executeTests(String className) throws ClassNotFoundException {
+        var testClass = TestAnnotationHandler.class.getClassLoader().loadClass(className);
+        var testData = new TestData(testClass);
         runTests(testData);
         testData.printTestResult();
     }
