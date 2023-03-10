@@ -3,20 +3,24 @@ package com.bogdanovstudio;
 import java.lang.reflect.Method;
 
 public class TestAnnotationHandler {
-    private static final TestResultHandler resultHandler = new TestResultConsolePrinter();
+    private final TestResultHandler resultHandler;
 
-    public static void executeTests(String className) throws ClassNotFoundException {
+    public TestAnnotationHandler(TestResultHandler resultHandler) {
+        this.resultHandler = resultHandler;
+    }
+
+    public void executeTests(String className) throws ClassNotFoundException {
         var testClass = TestAnnotationHandler.class.getClassLoader().loadClass(className);
         var testData = new TestData(testClass);
         runTests(testData);
         resultHandler.handleResult(testData);
     }
 
-    private static void runTests(TestData testData) {
+    private void runTests(TestData testData) {
         testData.getTestMethods().forEach(testMethod -> runTest(testMethod, testData));
     }
 
-    private static void runTest(Method testMethod, TestData testData) {
+    private void runTest(Method testMethod, TestData testData) {
         Object testObject;
         try {
             testObject = testData.createTestClassObject();
@@ -38,7 +42,7 @@ public class TestAnnotationHandler {
         System.out.println("------------------");
     }
 
-    private static boolean runBeforeMethods(TestData testData, Object testObject) {
+    private boolean runBeforeMethods(TestData testData, Object testObject) {
         var beforeMethods = testData.getBeforeMethods();
         var beforeMethodFailed = false;
         for (Method beforeMethod : beforeMethods) {
@@ -53,7 +57,7 @@ public class TestAnnotationHandler {
         return beforeMethodFailed;
     }
 
-    private static void runAfterMethods(TestData testData, Object testObject) {
+    private void runAfterMethods(TestData testData, Object testObject) {
         var afterMethods = testData.getAfterMethods();
         afterMethods.forEach(afterMethod -> {
             try {
