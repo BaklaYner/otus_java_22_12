@@ -26,12 +26,6 @@ class TestData {
         parseClass();
     }
 
-    private void parseClass() {
-        Stream.of(classForTest.getDeclaredMethods()).forEach(method -> annotations.forEach(anno -> {
-            if (method.isAnnotationPresent(anno)) methodsByAnnotation.get(anno).add(method);
-        }));
-    }
-
     public Object createTestClassObject() throws Exception {
         return classForTest.getConstructor().newInstance();
     }
@@ -83,6 +77,12 @@ class TestData {
         }
 
         System.out.println("Fatal error was occurred, tests wasn't run. " + fatalError);
+    }
+
+    private void parseClass() {
+        Stream.of(classForTest.getDeclaredMethods()).forEach(method -> annotations.forEach(anno -> {
+            if (method.isAnnotationPresent(anno)) methodsByAnnotation.get(anno).add(method);
+        }));
     }
 
     private String getFailedTestNames() {
