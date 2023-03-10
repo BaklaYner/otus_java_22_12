@@ -66,30 +66,21 @@ class TestData {
         fatalError = errorDescription;
     }
 
-    public void printTestResult() {
-        if (fatalError == null) {
-            var result = String.format("Test result: %d/%d success test", getSuccessTestQuantity(), getTotalTestQuantity());
-            System.out.println(result);
-            if (getSuccessTestQuantity() != getTotalTestQuantity()) {
-                System.out.println("Failed tests: " + getFailedTestNames());
-            }
-            return;
-        }
+    public String getFatalError() {
+        return fatalError;
+    }
 
-        System.out.println("Fatal error was occurred, tests wasn't run. " + fatalError);
+    public String getFailedTestNames() {
+        return resultsByMethodName.entrySet()
+                .stream()
+                .filter(entry -> "failed".equals(entry.getValue()))
+                .map(Map.Entry::getKey)
+                .collect(Collectors.joining(", "));
     }
 
     private void parseClass() {
         Stream.of(classForTest.getDeclaredMethods()).forEach(method -> annotations.forEach(anno -> {
             if (method.isAnnotationPresent(anno)) methodsByAnnotation.get(anno).add(method);
         }));
-    }
-
-    private String getFailedTestNames() {
-        return resultsByMethodName.entrySet()
-                .stream()
-                .filter(entry -> "failed".equals(entry.getValue()))
-                .map(Map.Entry::getKey)
-                .collect(Collectors.joining(", "));
     }
 }
