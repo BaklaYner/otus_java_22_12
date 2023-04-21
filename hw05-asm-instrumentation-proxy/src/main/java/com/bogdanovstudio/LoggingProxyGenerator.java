@@ -52,13 +52,18 @@ public class LoggingProxyGenerator {
         private boolean isEqualMethodsByParams(Method first, Method second) {
             var firstMethodParams = first.getParameters();
             var secondMethodParams = second.getParameters();
-            if (firstMethodParams.length != secondMethodParams.length) return false;
+            if (firstMethodParams.length != secondMethodParams.length) {
+                return false;
+            }
 
             for (int i = 0; i < firstMethodParams.length; i++) {
                 var firstMethodParamType = firstMethodParams[i].getType().getName();
                 var secondMethodParamType = secondMethodParams[i].getType().getName();
-                if (!firstMethodParamType.equals(secondMethodParamType)) return false;
+                if (!firstMethodParamType.equals(secondMethodParamType)) {
+                    return false;
+                }
             }
+
             return true;
         }
     }
