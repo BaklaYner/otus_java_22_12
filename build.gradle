@@ -21,6 +21,12 @@ allprojects {
             }
             dependency "com.google.guava:guava:${Versions.guava}"
             dependency "org.ow2.asm:asm-commons:${Versions.asm}"
+            dependency "org.junit.jupiter:junit-jupiter-api:${Versions.junit}"
+            dependency "org.junit.jupiter:junit-jupiter-engine:${Versions.junit}"
+            dependency "org.junit.jupiter:junit-jupiter-params:${Versions.junit}"
+            dependency "org.assertj:assertj-core:${Versions.assertj}"
+            dependency "org.mockito:mockito-core:${Versions.mockito}"
+            dependency "org.mockito:mockito-junit-jupiter:${Versions.mockito}"
         }
     }
 }
